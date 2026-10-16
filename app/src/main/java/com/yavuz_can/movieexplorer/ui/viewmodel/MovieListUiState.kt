@@ -1,4 +1,4 @@
-package com.yavuz_can.movieexplorer.ui.theme.viewmodel
+package com.yavuz_can.movieexplorer.ui.viewmodel
 
 import com.yavuz_can.movieexplorer.data.model.Movie
 

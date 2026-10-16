@@ -1,5 +1,6 @@
-package com.yavuz_can.movieexplorer.ui.theme.components
+package com.yavuz_can.movieexplorer.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,10 +32,13 @@ fun MovieCard(
     movie: Movie,
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(modifier = Modifier.padding(12.dp)) {
@@ -89,8 +93,14 @@ fun MovieCard(
 @Composable
 private fun MovieCardPreview() {
     MovieCard(
-        movie = Movie(1, "Inception", 8.8, "Bir hırsız, insanların rüyalarına girerek fikir çalar."),
+        movie = Movie(
+            id = 1,
+            title = "Inception",
+            rating = 8.8,
+            overview = "Bir hırsız, insanların rüyalarına girerek fikir çalar."
+        ),
         isFavorite = true,
-        onFavoriteClick = {}
+        onFavoriteClick = {},
+        onClick = {}
     )
 }

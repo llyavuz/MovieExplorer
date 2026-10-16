@@ -1,4 +1,4 @@
-package com.yavuz_can.movieexplorer.ui.theme.screens
+package com.yavuz_can.movieexplorer.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,13 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.yavuz_can.movieexplorer.data.model.Movie
-import com.yavuz_can.movieexplorer.ui.theme.components.MovieCard
+import com.yavuz_can.movieexplorer.ui.components.MovieCard
 
 @Composable
 fun MovieListScreen(
     movies: List<Movie>,
     favoriteIds: Set<Int>,
     onFavoriteClick: (Int) -> Unit,
+    onMovieClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -26,7 +27,8 @@ fun MovieListScreen(
             MovieCard(
                 movie = movie,
                 isFavorite = movie.id in favoriteIds,
-                onFavoriteClick = { onFavoriteClick(movie.id) }
+                onFavoriteClick = { onFavoriteClick(movie.id) },
+                onClick = { onMovieClick(movie.id) }
             )
         }
     }
