@@ -28,4 +28,14 @@ class MovieRepository {
             )
             .toMovieDetail()
     }
+    suspend fun searchMovies(query: String): List<Movie> {
+        return RetrofitInstance.api
+            .searchMovies(
+                query = query,
+                apiKey = BuildConfig.TMDB_API_KEY,
+                language = "tr-TR"
+            )
+            .results
+            .map { it.toMovie() }
+    }
 }
