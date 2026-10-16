@@ -15,10 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,9 +27,12 @@ import com.yavuz_can.movieexplorer.data.model.Movie
 import com.yavuz_can.movieexplorer.util.toPosterUrl
 
 @Composable
-fun MovieCard(movie: Movie, modifier: Modifier = Modifier) {
-    var isFavorite by remember { mutableStateOf(false) }
-
+fun MovieCard(
+    movie: Movie,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Card(
         modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -63,7 +62,7 @@ fun MovieCard(movie: Movie, modifier: Modifier = Modifier) {
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.weight(1f)
                     )
-                    TextButton(onClick = { isFavorite = !isFavorite }) {
+                    TextButton(onClick = onFavoriteClick) {
                         Text(text = if (isFavorite) "❤️" else "🤍")
                     }
                 }
@@ -90,6 +89,8 @@ fun MovieCard(movie: Movie, modifier: Modifier = Modifier) {
 @Composable
 private fun MovieCardPreview() {
     MovieCard(
-        movie = Movie(1, "Inception", 8.8, "Bir hırsız, insanların rüyalarına girerek fikir çalar.")
+        movie = Movie(1, "Inception", 8.8, "Bir hırsız, insanların rüyalarına girerek fikir çalar."),
+        isFavorite = true,
+        onFavoriteClick = {}
     )
 }

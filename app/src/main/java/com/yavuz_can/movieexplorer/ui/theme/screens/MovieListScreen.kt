@@ -11,14 +11,23 @@ import com.yavuz_can.movieexplorer.data.model.Movie
 import com.yavuz_can.movieexplorer.ui.theme.components.MovieCard
 
 @Composable
-fun MovieListScreen(movies: List<Movie>, modifier: Modifier = Modifier) {
+fun MovieListScreen(
+    movies: List<Movie>,
+    favoriteIds: Set<Int>,
+    onFavoriteClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyColumn(
         modifier = modifier,
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(movies, key = { it.id }) { movie ->
-            MovieCard(movie = movie)
+            MovieCard(
+                movie = movie,
+                isFavorite = movie.id in favoriteIds,
+                onFavoriteClick = { onFavoriteClick(movie.id) }
+            )
         }
     }
 }
